@@ -13,6 +13,8 @@ public class DB {
 
 	private static Connection conn = null;
 	
+	
+	//metodo de conexao com o banco de dados
 	public static Connection getConnection() {
 		if (conn == null) {
 			try {
@@ -27,6 +29,7 @@ public class DB {
 		return conn;
 	}
 	
+	//metodo que fecha a conexao com o banco de dados
 	public static void closeConnection() {
 		if (conn != null) {
 			try {
@@ -37,6 +40,7 @@ public class DB {
 		}
 	}
 	
+	//carrega os dados de conexao com o banco
 	private static Properties loadProperties() {
 		try (FileInputStream fs = new FileInputStream("db.properties")) {
 			Properties props = new Properties();
