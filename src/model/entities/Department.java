@@ -2,6 +2,7 @@ package model.entities;
 
 import java.io.Serializable;
 
+//serializible para que meu obejeto possa ser escrito em arquivos e possa ser convertido para bytes
 public class Department implements Serializable {
 
 	private static final long serialVersionUID = 1L;
