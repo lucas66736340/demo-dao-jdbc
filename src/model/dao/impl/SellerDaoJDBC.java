@@ -25,13 +25,13 @@ public class SellerDaoJDBC implements SellerDao {
 	}
 
 	@Override
-	public void isert(Seller obj) {
+	public void isert(Seller vendedor) {
 		// TODO Auto-generated method stub
 
 	}
 
 	@Override
-	public void update(Seller obj) {
+	public void update(Seller vendedor) {
 		// TODO Auto-generated method stub
 
 	}
@@ -57,18 +57,9 @@ public class SellerDaoJDBC implements SellerDao {
 			
 			// caso nao venha nehum vendedor
 			if (rs.next()) {
-				Department dep = new Department();
-				dep.setId(rs.getInt("DepartmentId"));
-				dep.setName(rs.getString("DepName"));
-
-				Seller obj = new Seller();
-				obj.setId(rs.getInt("Id"));
-				obj.setName(rs.getString("Name"));
-				obj.setEmail(rs.getString("Email"));
-				obj.setBaseSalary(rs.getDouble("BaseSalary"));
-				obj.setBirthDate(rs.getDate("BirthDate"));
-				obj.setDepartment(dep);
-				return obj;
+				Department dep = instanciaDepartamento(rs);
+				Seller vendedor = instanciaSeller(rs,dep);
+				return vendedor;
 			}
 			return null;
 
@@ -79,6 +70,28 @@ public class SellerDaoJDBC implements SellerDao {
 			DB.closeResultSet(rs);
 		}
 
+	}
+
+	//metodo que instancia um vendedor 
+	private Seller instanciaSeller(ResultSet rs, Department dep) throws SQLException {
+		Seller vendedor = new Seller();
+		vendedor.setId(rs.getInt("Id"));
+		vendedor.setName(rs.getString("Name"));
+		vendedor.setEmail(rs.getString("Email"));
+		vendedor.setBaseSalary(rs.getDouble("BaseSalary"));
+		vendedor.setBirthDate(rs.getDate("BirthDate"));
+		vendedor.setDepartment(dep);
+		return vendedor;
+	
+	}
+
+	//quando usar   throws quer dizer que o metodo que invocar esse vai ter que tratar a execao
+	//quando eu propago a execao o outro metodo trata ela 
+	private Department instanciaDepartamento(ResultSet rs) throws SQLException {
+	 Department dep =	new Department();
+		dep.setId(rs.getInt("DepartmentId"));
+		dep.setName(rs.getString("DepName"));
+		return dep;
 	}
 
 	@Override

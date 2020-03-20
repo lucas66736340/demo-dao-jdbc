@@ -11,6 +11,8 @@ public class Program {
 		// instanciando um dao a partir da Fabrica de dao
 		SellerDao sellerDao = DaoFactory.createSellerDao();
 
+		
+		
 		// usar a interface caso a regra de negocio mude no futuro
 		Seller vendedor = sellerDao.findById(3);
 
